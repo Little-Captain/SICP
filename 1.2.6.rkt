@@ -96,3 +96,19 @@
     (- (runtime) start-time)))
 
 (search-for-primes 100)
+
+; e.1.23
+(define (next n)
+  (if (= n 2) 3 (+ n 2)))
+
+(define (smallest-divisor1 n)
+  (find-divisor1 n 2))
+
+(define (find-divisor1 n test-divisor)
+  (cond ((> (square test-divisor) n) n)
+        ((divides? test-divisor n) test-divisor)
+        (else (find-divisor1 n (next test-divisor)))))
+
+(smallest-divisor1 101)
+
+; e.1.24
