@@ -27,15 +27,21 @@
   (= (* (numer x) (denom y))
      (* (numer y) (denom x))))
 
-;(define (make-rat n d) (cons n d))
+;(define (make-rat n d)
+;  (let ((n1 (abs n))
+;        (d1 (abs d))
+;        (g (gcd (abs n) (abs d))))
+;    (if (> (* n d) 0)
+;        (cons (/ n1 g) (/ d1 g))
+;        (cons (- (/ n1 g)) (/ d1 g)))))
+
+; 没有约分的版本
 (define (make-rat n d)
-  (let ((g (gcd n d)))
-    (cons (/ n g) (/ d g))))
+  (if (< d 0)
+      (cons (- n) (- d))
+      (cons n d)))
 (define (numer x) (car x))
 (define (denom x) (cdr x))
-;(define make-rat cons)
-;(define numer car)
-;(define denom cdr)
 
 (define (print-rat x)
   (newline)
@@ -49,3 +55,7 @@
 (print-rat (add-rat one-half one-third))
 (print-rat (mul-rat one-half one-third))
 (print-rat (add-rat one-third one-third))
+
+(print-rat (make-rat -1 2))
+(print-rat (make-rat -1 -2))
+(print-rat (make-rat 1 -12))
